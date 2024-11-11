@@ -2,17 +2,18 @@ import yt_dlp, os, sys
 
 def clear(): os.system('cls' if os.name == 'nt' else 'clear')
 
-download_dir = r"C:\Users\rajvi\Downloads"
+download_dir = r""
+#update your download path up here... for easement 
 
 def change_download_path(new_download_dir):
-    try:
-        os.chdir(new_download_dir)
-        print(f"Download path changed to: {new_download_dir}")
+    try: os.chdir(new_download_dir); print(f"Download path changed to: {new_download_dir}")
     except FileNotFoundError: print(f"Error: Directory {new_download_dir} not found.")
     except Exception as e: print(f"Error: {str(e)}")
 
-ffmpeg_path = r"C:\Program Files\ffmpeg\ffmpeg.exe"
-
+ffmpeg_path = r""
+#Install ffmpeg and paste the path up here! for easement
+#and By the by... install ytdlp if you haven't already... go to command prompt and execute... pip install yt-dlp
+#since i don't use anything other than windows... this YTB code might not work on non-windows or older windows devices... 
 def flashlight():
     manual = [
         "cls / clear    clears the screen",
@@ -21,8 +22,7 @@ def flashlight():
         "cd             change download path",
         "path           prints the path of the download dir"
     ]
-    for entry in manual:
-        print(entry)
+    for entry in manual: print(entry)
 
 def progress_hook(d):
     if d['status'] == 'downloading': print(f"\rDownloading: {d['_percent_str']}", end='')
@@ -62,7 +62,7 @@ def list_formats(url):
     except Exception as e: print(f"Error listing formats: {str(e)}")
 
 def download(url):
-    format = input("FORMAT? (V/A): ").upper()
+    format = input("FORMAT? (V/a): ").upper()
     ydl_opts_video, ydl_opts_audio = get_ydl_opts()
     try:
         if format in ["V", "VID", "VIDEO"]:
@@ -85,7 +85,7 @@ else: os.chdir(download_dir)
 if not ffmpeg_path: ffmpeg_path = input("Where is ffmpeg.exe stored? (use double backslashes) ")
 
 while True:
-    command = input("URL or COMMAND: ")
+    command = input("~$ ")
     if command.lower() in ["clear", "cls"]: clear()
     elif "exit" in command.lower(): exit()
     elif command.lower().startswith("cd"):
